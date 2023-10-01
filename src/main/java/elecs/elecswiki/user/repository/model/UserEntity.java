@@ -32,7 +32,4 @@ public class UserEntity {
     @NotNull
     Part part;
 
-    enum Part{
-        Guitar, Bass, Vocal, Keyboard, Drum
-    }
 }
