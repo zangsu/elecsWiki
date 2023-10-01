@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/css/bootstrap.min.css}"
+          href="../css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 560px;
+        }
+    </style>
+    <title>회원 가입</title>
+</head>
+<body>
+
+<div class="container">
+    <div class="py-5 text-center">
+        <h2>회원가입</h2>
+    </div>
+    <form  th:object="${userForm}"  th:action="@{${links.get('join')}}"th:method="post">
+        <div>
+            <label for="userName" th:text="#{label.user.userName}">이름</label>
+            <input type="text" id="userName" th:field="*{userName}">
+        </div>
+        <div>
+            <label for="id" th:text="#{label.user.id}">id</label>
+            <input type="text" id="id" th:field="*{id}">
+        </div>
+        <div>
+            <label for="password" th:text="#{label.user.password}">비번</label>
+            <input type="password" id="password" th:field="*{password}">
+        </div>
+        <div>
+            <label for="generation" th:text="#{label.user.generation}">generation</label>
+            <input type="text" id="generation" th:field="*{generation}">
+        </div>
+        <div>
+            <div th:text="#{label.user.part}">파트</div>
+            <select  class="form-select">
+                <option value="">==파트==</option>
+                <option th:each="part : ${parts}" th:value="${part}" th:text="${part.name()}"></option>
+            </select>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

@@ -1,15 +1,17 @@
 package elecs.elecswiki.user.repository.model;
 
 import com.sun.istack.NotNull;
+import lombok.Data;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "USERS")
+@Data
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long UserIdx;
+    long UserIdx;
 
     @Column(name = "USER_NAME")
     @NotNull
