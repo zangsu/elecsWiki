@@ -36,11 +36,15 @@
         </div>
         <div>
             <div th:text="#{label.user.part}">파트</div>
-            <select  class="form-select">
+            <select th:field="*{part}" class="form-select">
                 <option value="">==파트==</option>
                 <option th:each="part : ${parts}" th:value="${part}" th:text="${part.name()}"></option>
             </select>
         </div>
+
+        <button type="submit">
+            회원 가입
+        </button>
     </form>
 </div>
 

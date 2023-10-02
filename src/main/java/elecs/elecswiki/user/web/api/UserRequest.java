@@ -15,4 +15,6 @@ public class UserRequest {
     String password;
     int generation;
     Part part;
+
+
 }
