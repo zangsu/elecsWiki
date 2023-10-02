@@ -1,7 +1,9 @@
 package elecs.elecswiki.user.web;
 
 import elecs.elecswiki.user.repository.model.Part;
-import elecs.elecswiki.user.web.api.UserRequest;
+import elecs.elecswiki.user.service.UserService;
+import elecs.elecswiki.user.web.api.UserRequestDTO;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +18,10 @@ import java.util.HashMap;
 @Controller
 @RequestMapping("/user")
 @Slf4j
+@RequiredArgsConstructor
 public class UserController {
+
+    final UserService userService;
 
     static HashMap<String, String> links;
 
@@ -32,8 +37,8 @@ public class UserController {
     }
 
     @ModelAttribute(name = "userForm")
-    public UserRequest addUserForm() {
-        return new UserRequest();
+    public UserRequestDTO addUserForm() {
+        return UserRequestDTO.getEmptyDTO();
     }
 
     @GetMapping("/join")
@@ -46,8 +51,11 @@ public class UserController {
     }
 
     @PostMapping("/join")
-    public String join(@ModelAttribute UserRequest request, BindingResult bindingResult, Model model) {
-
+    public String join(@ModelAttribute UserRequestDTO request, BindingResult bindingResult, Model model) {
+        if(bindingResult.hasErrors()){
+            return "user/join";
+        }
+        long savedIdx = userService.saveUser(request);
         return "user/userhome";
     }
 }
